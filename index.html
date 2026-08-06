@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>Matrix Calculator</title>
+        <link rel="icon" type="image/png" src="trebleClef.png">
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdn.jsdelivr.net/npm/vexflow@4.2.3/build/cjs/vexflow.js"></script>
+    </head>
+    <body>
+
+        <nav class="navbar">
+            <img class="navbar-icon" src="trebleClef.png" alt="Logo">
+            <div id="navbarTitle">W<sup>2</sup> Matrix Calculator</div>
+            <ul class="navbar-list">
+                <li id="index" class="navbarItem">
+                    <a href="index.html">
+                        <span class="long-label">Home</span>
+                        <span class="short-label">H</span>
+                        <span class="mini-label">H</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="content">
+            <table id="table"></table>
+            <p></p>
+            <div class="buttonGroups">
+                <div id="pitchButtons">
+                    <button class="pitchInput" id="C#" onclick="inputPitch(this.id)">C&sharp;</button>
+                    <button class="pitchInput" id="D#" onclick="inputPitch(this.id)">D&sharp;</button>
+                    <button class="pitchInput" id="F#" onclick="inputPitch(this.id)">F&sharp;</button>
+                    <button class="pitchInput" id="G#" onclick="inputPitch(this.id)">G&sharp;</button>
+                    <button class="pitchInput" id="A#" onclick="inputPitch(this.id)">A&sharp;</button>
+                    <div class="rowBreak"></div>
+                    <button class="pitchInput" id="C" onclick="inputPitch(this.id)">C</button>
+                    <button class="pitchInput" id="D" onclick="inputPitch(this.id)">D</button>
+                    <button class="pitchInput" id="E" onclick="inputPitch(this.id)">E</button>
+                    <button class="pitchInput" id="F" onclick="inputPitch(this.id)">F</button>
+                    <button class="pitchInput" id="G" onclick="inputPitch(this.id)">G</button>
+                    <button class="pitchInput" id="A" onclick="inputPitch(this.id)">A</button>
+                    <button class="pitchInput" id="B" onclick="inputPitch(this.id)">B</button>
+                    <button class="pitchInput" id="pitchDel" onclick="deletePitch()" disabled>Delete</button>
+                </div>
+                <div id="articulationButtons">
+                    <button class="articulationInput" id="ord" onclick="inputArticulation(this.id)"><span class="articulationSymbol">(ord.)</span></button>
+                    <button class="articulationInput" id="stacc" onclick="inputArticulation(this.id)"><span class="articulationSymbol">&#xE4A2;</span></button>
+                    <button class="articulationInput" id="ten" onclick="inputArticulation(this.id)"><span class="articulationSymbol">&#xE4A4;</button>
+                    <button class="articulationInput" id="accent" onclick="inputArticulation(this.id)"><span class="articulationSymbol">&#xE4A0;</span></button>
+                    <button class="articulationInput" id="marc" onclick="inputArticulation(this.id)"><span class="articulationSymbol">&#xE4AC;</span></button>
+                    <button class="articulationInput" id="loure" onclick="inputArticulation(this.id)"><span class="articulationSymbol">&#xE4B2;</span></button>
+                    <div class="rowBreak"></div>
+                    <button class="articulationInput" id="wedge" onclick="inputArticulation(this.id)"><span class="articulationSymbol">&#xE4A6;</span></button>
+                    <button class="articulationInput" id="harm" onclick="inputArticulation(this.id)"><span class="articulationSymbol">&#xE614;</span></button>
+                    <button class="articulationInput" id="slur" onclick="inputArticulation(this.id)"><span class="articulationSymbol">&#xE4BA;</span></button>
+                    <button class="articulationInput" id="gliss" onclick="inputArticulation(this.id)"><span class="articulationSymbol">gliss.</span></button>
+                    <button class="articulationInput" id="acc" onclick="inputArticulation(this.id)"><span class="articulationSymbolSpecial">&#xE560;</span></button>
+                    <button class="articulationInput" id="trem" onclick="inputArticulation(this.id)"><span class="articulationSymbol">&#xF417;</span></button>
+                    <button class="pitchInput" id="articDel" onclick="deleteArticulation()" disabled>Delete</button>
+                    <div class="rowBreak"></div><div class="rowBreak"></div><div class="rowBreak"></div><div class="rowBreak"></div>
+                    <button id="download" onclick="downloadPNG()">Download PNG</button>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="scripts.js"></script>
+    <script src="musicNote.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</html>
+
+<!-- TO DO:
+    - make grid look nicer
+    - change harmonic position
+    - remove stems?
+--> 

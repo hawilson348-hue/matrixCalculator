@@ -23,6 +23,7 @@ button {
     transition: background-color 0.3s ease, transform 0.1s ease;
     -webkit-appearance: none;
     appearance: none;
+    color: black;
 }
 
 button:active {

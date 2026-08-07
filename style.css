@@ -21,6 +21,8 @@ button {
     border-radius: 10px;
     border: 2px solid black;
     transition: background-color 0.3s ease, transform 0.1s ease;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 button:active {

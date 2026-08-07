@@ -8,6 +8,20 @@
     src: url("fonts/Leland.otf") format("opentype");
 }
 
+@font-face {
+    font-family: "Gill Sans";
+    src: url("fonts/Gill Sans Medium.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Gill Sans";
+    src: url("fonts/Gill Sans Bold.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+}
+
 body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: rgb(250, 253, 255);
@@ -21,9 +35,11 @@ button {
     border-radius: 10px;
     border: 2px solid black;
     transition: background-color 0.3s ease, transform 0.1s ease;
-    -webkit-appearance: none;
-    appearance: none;
     color: black;
+}
+
+button:disabled {
+    color: rgb(189, 189, 189);
 }
 
 button:active {
@@ -130,6 +146,7 @@ music-note {
     width: calc(44px * var(--scaleFactor));
     height: calc(45px * var(--scaleFactor));
     overflow: visible;
+    padding-left: 1px;
 }
 
 music-note svg {

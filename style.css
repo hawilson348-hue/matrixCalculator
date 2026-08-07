@@ -1,3 +1,8 @@
+:root {
+    --scaleFactor: 0.95;
+    --btnScale: 1;
+}
+
 @font-face {
     font-family: "Leland";
     src: url("fonts/Leland.otf") format("opentype");
@@ -22,13 +27,13 @@ button:active {
 }
 
 .pitchInput, .articulationInput {
-    /* margin-right: 1px; */
     padding: 10px 0px;
-    width: 60px;
-    height: 50px;
+    width: calc(60px * var(--btnScale));
+    height: calc(50px * var(--btnScale));
     margin-bottom: -5px;
     background: linear-gradient(to right, white, rgb(222, 222, 222));
     vertical-align: middle;
+    overflow: hidden;
 }
 
 .rowBreak {
@@ -41,11 +46,7 @@ button:active {
     line-height: 0.5;
 }
 
-.pitchInput, .articulationInput {
-    overflow: hidden;
-}
-
-#download { background: rgb(148, 249, 148); margin-left: 113.5px; }
+#download { background: rgb(148, 249, 148); margin-left: calc(113.5px * var(--btnScale)); }
 #download:hover { background: rgb(58, 233, 58); }
 #download:active { background: rgb(32, 203, 32);}
 
@@ -61,11 +62,11 @@ button:active {
 
 #pitchDel, #articDel {
     width: 100px;
-    margin-left: 45px;
+    margin-left: calc(45px * var(--btnScale));
     position: relative;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 22px;
-    top: -26.25px;
+    top: calc(-26.25px * var(--btnScale));
 }
 
 #gliss {
@@ -76,9 +77,9 @@ button:active {
     font-size: 16px;
 }
 
-#C\# { margin-left: 32.5px; }
-#F\# { margin-left: 65px; }
-#A\# { margin-right: 185px; }
+#C\# { margin-left: calc(32.5px * var(--btnScale)); }
+#F\# { margin-left: calc(65px * var(--btnScale)); }
+#A\# { margin-right: calc(185px * var(--btnScale)); }
 
 .pitchInput:hover, .articulationInput:hover { background: linear-gradient(to right, rgb(237, 237, 237), rgb(195, 195, 195));}
 .pitchInput:active, .articulationInput:active { background: linear-gradient(to right, rgb(210, 210, 210), rgb(155, 155, 155));}
@@ -86,6 +87,8 @@ button:active {
 .container, .content {
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
     margin-top: 70px;
     color: #2a2a2a;
 }
@@ -98,20 +101,37 @@ button:active {
 }
 
 table {
-    margin: 0 auto;
     border-collapse: collapse;
     border-radius: 12px;
     overflow: hidden;
+    table-layout: fixed;
 }
 
 th, td {
     border: 1px solid black;
-    font-size: 20px;
-    width: 44px;
-    height: 45px;
+    font-size: calc(20px * var(--scaleFactor));
+    width: calc(46px * var(--scaleFactor));
+    height: calc(46px * var(--scaleFactor));
     text-align: center;
     vertical-align: middle;
     font-weight: normal;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+music-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(44px * var(--scaleFactor));
+    height: calc(45px * var(--scaleFactor));
+    overflow: visible;
+}
+
+music-note svg {
+    transform: scale(var(--scaleFactor));
+    transform-origin: center;
+    flex-shrink: 0;
 }
 
 #pitchButtons {
@@ -177,18 +197,44 @@ th, td {
     text-decoration: none;
 }
 
-.long-label { display: inline; }
-.short-label { display: none; }
-.mini-label { display: none; }
+@media (max-width: 1240px) { /* smaller buttons */
+    :root {
+        --scaleFactor: 0.85;
+        --btnScale: 0.85;
+    }
+    
+    .pitchInput, .articulationInput {
+        font-size: 16px;
+        padding: 0px 0px;
+    }
+    .articulationInput { font-size: 35px; }
+    #gliss { font-size: 16px; }
+    #ord { font-size: 13px; }
+    
+    #pitchDel, #articDel {
+        font-size: 18px;
+        width: 65px;
+    }
 
-@media (max-width: 900px) {
-    .long-label { display: none; }
-    .short-label { display: inline; }
-    .mini-label { display: none; }
+    #C, #ord, #wedge { margin-left: 0px; }
 }
 
-@media (max-width: 650px) {
-    .long-label { display: none; }
-    .short-label { display: none; }
-    .mini-label { display: inline; }
+@media (max-width: 1080px) { /* smaller buttons */
+    :root {
+        --scaleFactor: 0.7;
+        --btnScale: 0.7;
+    }
+}
+
+@media (max-width: 900px) { /* vertical move */
+    :root {
+        --scaleFactor: 0.72;
+        --btnScale: 0.72;
+    }
+
+    .content {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
 }

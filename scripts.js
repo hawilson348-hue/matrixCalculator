@@ -224,7 +224,7 @@ function deleteArticulation() {
 }
 
 async function downloadPNG() {
-    const canvas = await html2canvas(document.getElementById("table"), { scale: 4 } );
+    const canvas = await html2canvas(document.getElementById("table"), { scale: 8 } );
 
     const a = document.createElement("a");
     a.href = canvas.toDataURL("image/png");

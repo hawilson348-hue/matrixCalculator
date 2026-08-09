@@ -159,6 +159,37 @@ music-note svg {
     text-align: center;
 }
 
+#aboutContent {
+    margin-top: 65px;
+    font-size: 18px;
+}
+
+#exMatrix1 {
+    width: 500px;
+    height: auto;
+}
+
+h2 {
+    font-size: 26px;
+}
+
+h3 {
+    text-decoration: underline;
+    font-weight: normal;
+}
+
+pre {
+    background-color: rgb(233, 233, 233);
+    border-radius: 10px;
+    padding: 10px;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+
+.comment {
+    color: rgb(144, 144, 144);
+}
+
 /* NAVBAR */
 
 .navbar {
@@ -207,6 +238,7 @@ music-note svg {
 .navbarItem {
     cursor: pointer;
     user-select: none;
+    margin-top: 4px;
 }
 
 .selectedItem {

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>Matrix Calculator</title>
+        <link rel="icon" type="image/png" href="trebleClef.png">
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </head>
+    <body>
+
+        <nav class="navbar">
+            <img class="navbar-icon" src="trebleClef.png" alt="Logo">
+            <div id="navbarTitle">\( \mathbf{W}^2 \) Matrix Calculator</div>
+            <ul class="navbar-list">
+                <li id="about" class="navbarItem"> <a href="about.html"> About </a> </li>
+                <li id="index" class="navbarItem"> <a href="index.html"> Matrix </a> </li>
+            </ul>
+        </nav>
+
+        <div id="aboutContent">
+            <h2>What is the \( \mathbf{W}^2 \) matrix?</h2>
+            <p>
+                The \( \mathbf{W}^2 \) matrix uses the conventional twelve-tone method of Arnold Schoenberg, in which a prime row is devised
+                and from it the rows of its inversions, retrogrades and retrograde inversions are constructed. This in itself
+                is of course not unusual, but the distinguishing factor of this matrix is that the &#8220;mode of attack&#8221;
+                (or articulation) is also serialised, and entirely within the matrix itself.
+            </p>
+            <h2>The Wilson Transform</h2>
+            <h3>A Procedural Description</h3>
+            <p>
+                The function \( \mathbf{W}_n(R) \), the Wilson Transform (based unintentionally on the Josephus permutation!),
+                takes inputs \( n \) and \( R \), where \( n \) is an integer and \( R \) is a sequence of twelve articulations.
+                Firstly we write down the \( n^\text{th} \) element in \( R \), then remove it from \( R \). Next, beginning from
+                the next element (wrapping around where necessary), we count \( n \) elements cyclically and write down the
+                corresponding number, then remove it from \( R \).
+            </p>
+            <p>
+                Hence, as examples, \( \mathbf{W}_3([1, 2, 3, ..., 12]) = [3, 6, 9, 12, 4, 8, 1, 7, 2, 11, 5, 10] \) and
+                \( \mathbf{W}_{10}([1, 2, 3, ..., 12]) = [10, 8, 7, 9, 12, 3, 11, 6, 2, 4, 1, 5] \).
+            </p>
+            <p>
+                The prime articulation row is devised first. To create the articulation rows corresponding to the subsequent
+                pitch rows, the index of the starting note of each row is taken (where 0 denotes the first note of the prime
+                row, 1 the next note ascending chromatically, etc.) and 1 is added, in order to preserve the prime articulation
+                row. We assign this value the identifier \( k \). Note that the label <b>P</b><sub>\( k-1 \)</sub> is given by
+                the first column of the pitch matrix itself.
+            </p>
+            <p>
+                Then each articulation row is given by \( \mathbf{W}_k(A) \), where \( A \) is the prime articulation row.
+            </p>
+            <h3>A Code Implementation</h3>
+            <p>
+                As the Wilson Transform is iterative and selective by nature, it lends itself far more readily to a
+                computational description than an entirely mathematical one. A pseudocode implementation is shown below.
+            </p>
+            <pre><code>FUNCTION wilsonTransform(n, row)
+    ARRAY transformed[12]
+    pointer = 0 <span class="comment">// points to next free element in the transformed array</span>
+    index = -1 <span class="comment">// points to current element in the row</span>
+
+    WHILE pointer < 12
+        FOR k = 0 TO n - 1 <span class="comment">// counts n items</span>
+            DO
+                index = (index + 1) MOD 12 <span class="comment">// increments index, cycling round where necessary</span>
+            UNTIL NOT transformed.contains(row[index]) <span class="comment">// increment again if value has already been selected</span>
+        NEXT k
+
+        transformed[pointer] = row[index] <span class="comment">// add value to the transformed array</span>
+        pointer = pointer + 1
+    ENDWHILE
+
+    RETURN transformed
+ENDFUNCTION</code></pre>
+            <h2>Example Matrix</h2>
+            <p>
+                <b>Prime pitch row</b>: F&sharp;, A, D&sharp;, F, D, G&sharp;, E, B, C&sharp;, C, A&sharp;, G
+                <br>
+                <b>Prime articulation row</b>: tenuto, marcato, ord., slur, staccatissimo, gliss., staccato, acciaccatura, accent,
+                    tremolo, louré, harmonic
+            </p>
+            <p>
+                In the standard way, the remaining prime pitch rows are created (the first of which is a transposition of <b>P</b><sub>0</sub>
+                down a minor third, etc.). Then to create the articulation row for the second row, <b>P</b><sub>9</sub>,
+                we add 1 to arrive at \( k = 10 \), then we apply the Wilson Transform to give
+                \[ \mathbf{W}_{10}([\text{ten.}, \,\text{marc.}, \,\text{ord.}, \,...\,, \,\text{harm.}]) =
+                    [\text{trem.}, \,\text{acciacc.}, \,\text{stacc.}, \,\text{accent}, \,\text{harm.}, \,\text{ord.},
+                    \,\text{louré}, \,\text{gliss.}, \,\text{marc.}, \,\text{slur}, \,\text{ten.}, \,\text{staccatiss.}] \]
+                as shown in the matrix below. Similarly articulation rows are calculated for <b>P</b><sub>3</sub>,
+                <b>P</b><sub>1</sub> etc.
+            </p>
+            <img id="exMatrix1" src="exampleMatrix1.png">
+            <p>
+                In the typical way, one can select rows &mdash; for example <b>P</b><sub>6</sub>, <b>I</b><sub>7</sub> or
+                <b>RI</b><sub>11</sub> &mdash; from which to compose a piece.
+            </p>
+            <p>
+                Note that, as the mode of attack is constructed purely in rows, any columns (which may be used) may contain duplicate
+                modes of attack and therefore indeed omit some. It is arguable whether this truly fits the brief of serialism,
+                but in my opinion its highly algorithmic construction method and the fact that each articulation occurs the same number
+                of times in the entire matrix mean that this is sufficiently serialist for my satisfaction.
+            </p>
+            <p>
+                Indeed, <b>I</b><sub>8</sub> is perhaps this particular matrix's most extreme example of this, home to a whopping
+                five tremolos, three slurs, three staccatissimos and one harmonic! Hence this row might be most suited to a string instrument,
+                though naturally wind or brass instruments (flutter-tonguing) and percussion (rolls) could also use this row to great effect. This
+                to me suggests choosing particular rows/columns for particular instruments should perhaps be more carefully
+                considered when using a \( \mathbf{W}^2 \) matrix compared to a standard matrix which only serialises pitch.
+            </p>
+        </div>
+    </body>
+</html>

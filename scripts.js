@@ -178,6 +178,8 @@ function wTransform(notes, n) {
     return t;
 }
 
+//console.log(wTransform([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 9))
+
 function getNumbersOnly(s) {
     return s.replace(/\D/g, "");
 }

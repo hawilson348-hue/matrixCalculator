@@ -28,6 +28,10 @@
                 is of course not unusual, but the distinguishing factor of this matrix is that the &#8220;mode of attack&#8221;
                 (or articulation) is also serialised, and entirely within the matrix itself.
             </p>
+            <p>
+                Its name comes from the Wilson Transform operator, \( \mathbf{W} \), and the fact that <b>two</b> musical parameters
+                are serialised; hence, \( \mathbf{W}^2 \).
+            </p>
             <h2>The Wilson Transform</h2>
             <h3>A Procedural Description</h3>
             <p>
@@ -35,7 +39,7 @@
                 takes inputs \( n \) and \( R \), where \( n \) is an integer and \( R \) is a sequence of twelve articulations.
                 Firstly we write down the \( n^\text{th} \) element in \( R \), then remove it from \( R \). Next, beginning from
                 the next element (wrapping around where necessary), we count \( n \) elements cyclically and write down the
-                corresponding number, then remove it from \( R \).
+                corresponding element, then remove it from \( R \).
             </p>
             <p>
                 Hence, as examples, \( \mathbf{W}_3([1, 2, 3, ..., 12]) = [3, 6, 9, 12, 4, 8, 1, 7, 2, 11, 5, 10] \) and
